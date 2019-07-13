@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [[ $1 == 'set' ]] || [[ $1 == 's' ]]; then
+    deactivate 2> /dev/null || true
+
+    if [[ $2 == '' ]]; then
+        true
+    elif [[ $2 == '2' ]] || [[ $2 == '2.7' ]]; then
+        source "$HOME/.virtualenvs/common_py27/bin/activate"
+    elif [[ $2 == '3' ]] || [[ $2 == '3.6' ]]; then
+        source "$HOME/.virtualenvs/common_py3/bin/activate"
+    else
+        source "$2/bin/activate"
+    fi
+elif [[ $1 == 'debug' ]] || [[ $1 == 'd' ]]; then
+    python -m pudb ${@:2}
+else 
+    python $@
+fi
