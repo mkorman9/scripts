@@ -1,0 +1,9 @@
+#!/bin/bash
+
+WINDOW='0'
+
+if [[ $1 != '' ]]; then
+    WINDOW="$1"
+fi
+
+tmux a -t "$WINDOW"
