@@ -2244,3 +2244,5 @@ Set gdb to work with 64bits binaries
 end
 
 #EOF
+
+set auto-load safe-path /
