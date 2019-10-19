@@ -1,0 +1,6 @@
+#!/bin/bash
+
+ip="$(ipconfig getifaddr en0)"
+mask="$(ipcalc $(ipconfig getoption en0 subnet_mask) | grep Netmask | awk '{ print $4 }')"
+
+nmap -sP $ip/$mask
