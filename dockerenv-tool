@@ -5,11 +5,11 @@ DOCKER_ENV="$1"
 case $DOCKER_ENV in
     brzuchacz)
         export DOCKER_HOST="tcp://192.168.255.50:2376"
-	echo '1'
+	    echo 'Setting DOCKER_HOST to remote host'
         ;;
 
     *)
         export DOCKER_HOST=""
-	echo '2'
+        echo 'Setting DOCKER_HOST to localhost'
         ;;
 esac	
