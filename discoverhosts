@@ -1,6 +1,13 @@
 #!/bin/bash
 
-ip="$(ipconfig getifaddr en0)"
-mask="$(ipcalc $(ipconfig getoption en0 subnet_mask) | grep Netmask | awk '{ print $4 }')"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    interface="${1:-en0}"
+    ip="$(ipconfig getifaddr $interface)"
+    mask="$(ipcalc $(ipconfig getoption $interface subnet_mask) | grep Netmask | awk '{ print $4 }')"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    interface="${1:-wlp2s0}"
+    ip="$(ifconfig $interface | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*')"
+    mask="$(ipcalc $(ifconfig $interface | grep -Eo 'netmask ?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*') | grep Netmask | awk '{ print $4 }')"
+fi
 
 nmap -sP $ip/$mask
