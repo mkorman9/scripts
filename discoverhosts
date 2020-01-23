@@ -10,4 +10,5 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     mask="$(ipcalc $ip/$(ifconfig $interface | grep -Eo 'netmask ?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*') | grep Netmask | awk '{ print $4 }')"
 fi
 
-nmap -sP $ip/$mask
+# https://superuser.com/questions/887887/different-behavior-sudo-nmap-vs-just-nmap
+sudo nmap -sP $ip/$mask
