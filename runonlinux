@@ -1,9 +1,0 @@
-#!/bin/sh
-
-if [[ $1 == '' ]]; then
-    TARGET=""
-else
-    TARGET="./$1"
-fi
-
-docker run --rm -it -v "$(pwd)":/current -w /current ubuntu:bionic $TARGET

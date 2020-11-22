@@ -1,9 +1,0 @@
-#!/bin/sh
-
-if [[ $1 == '' ]]; then
-    echo 'usage: debugserveronlinux <binary>'
-    exit 1
-fi
-
-docker run --rm -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined -v "$(pwd)":/current -p 127.0.0.1:2137:2137 -w /current mkorman/bionic-with-gdbserver \
-    gdbserver 0.0.0.0:2137 $1
